@@ -1,0 +1,8 @@
+/* Custom color pagination */
+a.page-link {
+  color: #198754;
+}
+.active > .page-link {
+  background-color: #198754;
+  border-color: #198754;
+}
