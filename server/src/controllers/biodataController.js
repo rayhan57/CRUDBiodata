@@ -1,7 +1,7 @@
 import Biodata from "../models/biodataModel.js";
 
-const handleResponse = (res, success, message, data) => {
-  res.json({ success, message, data });
+const handleResponse = (res, success, message, datas) => {
+  res.json({ success, message, datas });
 };
 
 export const getAllData = async (req, res) => {

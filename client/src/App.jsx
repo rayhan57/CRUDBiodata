@@ -6,9 +6,10 @@ import TableData from "./components/TableData";
 import ModalData from "./components/ModalData";
 import SearchData from "./components/SearchData";
 import ButtonTambah from "./components/ButtonTambah";
-import MyPagination from "./components/MyPagination";
+import { MyPagination } from "./components/MyPagination";
 
-axios.defaults.baseURL = "https://crud-biodata-api.vercel.app/";
+// axios.defaults.baseURL = "https://crud-biodata-api.vercel.app/";
+axios.defaults.baseURL = "http://localhost:3000/";
 
 function App() {
   const [data, setData] = useState([]);
@@ -25,17 +26,7 @@ function App() {
     umur: "",
     alamat: "",
   });
-  const [currentPage, setCurrentPage] = useState(1); // State untuk melacak halaman aktif
-  const dataPerPage = 10; // Jumlah data yang akan ditampilkan per halaman
-  // Menghitung indeks data pertama dan terakhir untuk halaman saat ini
-  const lastIndex = currentPage * dataPerPage;
-  const firstIndex = lastIndex - dataPerPage;
-  const dataToShow = data.slice(firstIndex, lastIndex); // Mengambil data yang sesuai dengan halaman saat ini
-  const totalPages = Math.ceil(data.length / dataPerPage); // Menghitung jumlah halaman yang diperlukan
-  // Membuat array dari nomor halaman yang akan ditampilkan
-  const pageNumbers = [...Array(totalPages).keys()].map(
-    (pageNumber) => pageNumber + 1
-  );
+  const [dataToShow, setDataToShow] = useState([]);
 
   function handleInputChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -70,8 +61,8 @@ function App() {
 
   async function handleSearch() {
     const searchResult = await axios.get(`/search?keyword=${searchText}`);
-    setData(searchResult.data.data);
-    if (searchResult.data.data.length === 0) {
+    setData(searchResult.data.datas);
+    if (searchResult.data.datas === null) {
       setShowFeedback(true);
       setVariant("danger");
       setTextFeedback("<b>Oops!</b> Data tidak ada");
@@ -90,8 +81,7 @@ function App() {
     try {
       const response = await axios.get("/");
       if (response.data.success) {
-        const Data = response.data.data;
-        setData(Data);
+        setData(response.data.datas);
       } else {
         console.error("Gagal mengambil data dari server.");
       }
@@ -168,14 +158,7 @@ function App() {
       />
 
       <Row>
-        <MyPagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          firstIndex={firstIndex}
-          lastIndex={lastIndex}
-          pageNumbers={pageNumbers}
-          totalPages={totalPages}
-        />
+        <MyPagination data={data} setDataToShow={setDataToShow} />
       </Row>
     </Container>
   );
