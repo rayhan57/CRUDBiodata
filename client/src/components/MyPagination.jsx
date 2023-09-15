@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Pagination } from "react-bootstrap";
 
-export function MyPagination({ data, setDataToShow }) {
+function MyPagination({ data, setDataToShow }) {
   const [currentPage, setCurrentPage] = useState(1); // State untuk melacak halaman aktif
   const dataPerPage = 10; // Jumlah data yang akan ditampilkan per halaman
 
@@ -56,3 +56,5 @@ export function MyPagination({ data, setDataToShow }) {
     </Pagination>
   );
 }
+
+export default MyPagination;

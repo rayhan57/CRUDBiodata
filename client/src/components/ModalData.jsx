@@ -36,6 +36,7 @@ function ModalData({
               name="umur"
               value={formData.umur}
               onChange={handleInputChange}
+              min={0}
               required
             />
           </Form.Group>

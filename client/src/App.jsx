@@ -6,10 +6,9 @@ import TableData from "./components/TableData";
 import ModalData from "./components/ModalData";
 import SearchData from "./components/SearchData";
 import ButtonTambah from "./components/ButtonTambah";
-import { MyPagination } from "./components/MyPagination";
+import MyPagination from "./components/MyPagination";
 
-// axios.defaults.baseURL = "https://crud-biodata-api.vercel.app/";
-axios.defaults.baseURL = "http://localhost:3000/";
+axios.defaults.baseURL = "https://crud-biodata-api.vercel.app/";
 
 function App() {
   const [data, setData] = useState([]);
